@@ -29,14 +29,17 @@
 					</header>
 
 				<!-- Nav -->
-					<nav id="nav">
-						<ul>
-							<li><a href="#intro" class="active">Introduction of myself</a></li>
-							<li><a href="#first">Finding high Quality Climate Data for Niche Modeling</a></li>
-							<li><a href="#second">Suitability Analysis for Adaptation</a></li>
-							<li><a href="#cta">My Publications</a></li>
-						</ul>
-					</nav>
+				<nav id="nav">
+					<ul>
+						<li><a href="#intro" class="active">Introduction of myself</a></li>
+						<li><a href="#first">Finding high Quality Climate Data for Niche Modeling</a></li>
+						<li><a href="#second">Suitability Analysis for Adaptation</a></li>
+						<li><a href="#blog-preview">My Blogs</a></li> <!-- New Menu Item -->
+						<li><a href="#cta">My Publications</a></li>
+						
+					</ul>
+				</nav>
+				
 
 				<!-- Main -->
 					<div id="main">
@@ -150,7 +153,36 @@
 									</ul>
 								</footer>
 							</section>
-
+							<section id="blog-preview" class="main special">
+								<header class="major">
+									<h2 id="blog-title">Latest Blog Post</h2>
+								</header>
+								<p id="blog-content" class="content">
+									Loading latest post...
+								</p>
+								<a id="blog-link" href="https://blogs.ubc.ca/stardust/" class="button">Read More</a>
+							</section>
+							
+							<script>
+								fetch('https://blogs.ubc.ca/stardust/feed/')
+									.then(response => response.text())
+									.then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+									.then(data => {
+										const firstItem = data.querySelector("item");
+										const title = firstItem.querySelector("title").textContent;
+										const link = firstItem.querySelector("link").textContent;
+										let description = firstItem.querySelector("description").textContent;
+										// Truncate description to 100 words
+										description = description.split(' ').slice(0, 100).join(' ') + '...';
+							
+										document.getElementById('blog-title').textContent = title;
+										document.getElementById('blog-content').textContent = description;
+										document.getElementById('blog-link').setAttribute('href', link);
+									})
+									.catch(err => console.log('Fetch Error :-S', err));
+							</script>
+							
+							
 						<!-- Get Started -->
 							<section id="cta" class="main special">
 								<header class="major">
