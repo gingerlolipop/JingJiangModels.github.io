@@ -11,6 +11,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	    <style>
+			.plot-container {
+				margin-bottom: 20px;
+			}
+			.plot-title {
+				font-size: 1em; 
+				margin-bottom: 5px;
+			}
+		</style>
+		<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -32,8 +43,73 @@
 								<h2>Magna feugiat lorem</h2>
 								<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis fames ac ante ipsum primis in faucibus.</p>
 								<p>Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Consequat leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit enim turpis lorem ipsum dolor sit amet feugiat. Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet est velit quis lorem.</p>
+								<h2>Prediction Accuracy: ClimateAP VS. WorldClim</h2>
+								<p>
+									To objectively assess the predictive accuracy of ClimateAP against WorldClim data, this study uses observed climate data from weather stations as a benchmark. Regressing these observed values on the predictions from ClimateAP and WorldClim allows for a direct comparison of accuracy. By examining the results from both sets of regressions, we can determine which climate data source more accurately reflects real-world conditions. 
+								</p>								<h2>Methodology</h2>
+								<p>To assess the precision of ClimateAP's climatic predictions, we applied Ordinary Least Squares (OLS) regression, which can be represented as:</p>
+								<p>$$ y = X\beta + \epsilon $$</p>
+								<p>where:</p>
+								<ul>
+									<li>\( y \) is the vector of observed climate values,</li>
+									<li>\( X \) is the matrix containing a column of ones and ClimateAP's predictions,</li>
+									<li>\( \beta \) represents the regression coefficients,</li>
+									<li>\( \epsilon \) denotes the residuals.</li>
+								</ul>
+								<p>The matrices are detailed as follows:</p>
+								<p>$$
+								y =
+								\begin{bmatrix}
+								y_1 \\\\
+								y_2 \\\\
+								\vdots \\\\
+								y_n
+								\end{bmatrix},\quad
+								X =
+								\begin{bmatrix}
+								1 & x_1 \\\\
+								1 & x_2 \\\\
+								\vdots & \vdots \\\\
+								1 & x_n
+								\end{bmatrix},\quad
+								\beta =
+								\begin{bmatrix}
+								\beta_0 \\\\
+								\beta_1
+								\end{bmatrix},\quad
+								\epsilon =
+								\begin{bmatrix}
+								\epsilon_1 \\\\
+								\epsilon_2 \\\\
+								\vdots \\\\
+								\epsilon_n
+								\end{bmatrix}
+								$$
+								</p>
+								<p>Performance metrics such as RMSE and R<sup>2</sup> are computed to evaluate the model's predictive accuracy and the explanatory power:</p>
+								<p>RMSE: $$ RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2} $$</p>
+								<p>R<sup>2</sup>: $$ R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2} $$</p>
+								<p>Adjusted R<sup>2</sup>: $$ adj. R^2 = 1 - \left(\frac{(1 - R^2)(n - 1)}{n - p - 1}\right) $$</p>
+
+								<div class="plot-container">
+									<p class="plot-title"><strong>Plot 1:</strong> RMSE for 30-Year Climate Predictions<sup>3</sup></p>
+									<iframe src="images\validate ap images\hyp1\30yrave\RMSE.html" title="RMSE for 30-Year Climate Predictions" width="100%" height="600" style="border:none;"></iframe>
+								</div>
+							
+								<div class="plot-container">
+									<p class="plot-title"><strong>Plot 2:</strong> Adjusted R<sup>2</sup> for 30-Year Average Predictions<sup>2</sup></p>
+									<iframe src="images\validate ap images\hyp1\30yrave\AdjustedRSquared.html" title="Adjusted R2 for 30-Year Average Predictions" width="100%" height="600" style="border:none;"></iframe>
+								</div>
+							
+								<footer>
+									<hr>
+									<p><sup>1</sup> These interactive plots display the validation results for climate models based on a 30-year average from 1961 to 1990.</p>
+									<p><sup>2</sup> Adjusted R<sup>2</sup> assesses the model's ability to explain the variability in observed climate data.</p>
+									<p><sup>3</sup> RMSE (Root Mean Square Error) quantifies the model's prediction accuracy by measuring the average magnitude of the prediction errors.</p>
+								</footer>							
 								<h2>Tempus veroeros</h2>
 								<p>Cep risus aliquam gravida cep ut lacus amet. Adipiscing faucibus nunc placerat. Tempus adipiscing turpis non blandit accumsan eget lacinia nunc integer interdum amet aliquam ut orci non col ut ut praesent. Semper amet interdum mi. Phasellus enim laoreet ac ac commodo faucibus faucibus. Curae ante vestibulum ante. Blandit. Ante accumsan nisi eu placerat gravida placerat adipiscing in risus fusce vitae ac mi accumsan nunc in accumsan tempor blandit aliquet aliquet lobortis. Ultricies blandit lobortis praesent turpis. Adipiscing accumsan adipiscing adipiscing ac lacinia cep. Orci blandit a iaculis adipiscing ac. Vivamus ornare laoreet odio vis praesent nunc lorem mi. Erat. Tempus sem faucibus ac id. Vis in blandit. Nascetur ultricies blandit ac. Arcu aliquam. Accumsan mi eget adipiscing nulla. Non vestibulum ac interdum condimentum semper commodo massa arcu.</p>
+
 							</section>
 
 					</div>
